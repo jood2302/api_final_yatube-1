@@ -54,7 +54,8 @@ class CommentViewSet(viewsets.ModelViewSet):
             raise API_RAISE_403
         instance.delete()
 
-class FollowViewSet(viewsets.ReadOnlyModelViewSet):
+
+class FollowViewSet(viewsets.ModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
-# TODO:  Напишите свой вариант
+
