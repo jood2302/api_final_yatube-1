@@ -34,6 +34,10 @@ class Comment(models.Model):
     created = models.DateTimeField(
         'Дата добавления', auto_now_add=True, db_index=True)
 
+    def __str__(self):
+        return (f'Автор {self.author.username}'
+                f' текст {self.text[:15]}')
+
 
 class Follow(models.Model):
 
