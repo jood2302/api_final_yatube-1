@@ -14,4 +14,9 @@ router_v1.register(r'posts/(?P<post_id>\d+)/comments',
 urlpatterns = [
     path('v1/api-token-auth/', views.obtain_auth_token),
     path('v1/', include(router_v1.urls)),
+    # Djoser создаст набор необходимых эндпоинтов.
+    # базовые, для управления пользователями в Django:
+    path('v1/', include('djoser.urls')),
+    # JWT-эндпоинты, для управления JWT-токенами:
+    path('v1/', include('djoser.urls.jwt')),
 ]
