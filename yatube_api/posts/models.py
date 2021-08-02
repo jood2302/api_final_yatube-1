@@ -63,7 +63,7 @@ class Follow(models.Model):
                 name='not_yourself_follow'
             ),
         ]
-        ordering = ('following',)
+        ordering = ('user',)
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
 

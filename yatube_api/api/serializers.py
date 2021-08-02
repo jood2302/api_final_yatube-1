@@ -1,9 +1,9 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ParseError
 from rest_framework.relations import SlugRelatedField
 from rest_framework.validators import UniqueTogetherValidator
 
-
-from posts.models import Comment, Follow, Post, Group
+from posts.models import Comment, Follow, Group, Post, User
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -32,29 +32,36 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
-    """user = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-        default=serializers.CurrentUserDefault()
-    )"""
     user = serializers.SlugRelatedField(
-        slug_field='username', read_only=True
+        slug_field='username', read_only=True,
+        default=serializers.CurrentUserDefault()
     )
     following = serializers.SlugRelatedField(
-        slug_field='username', read_only=True
+        slug_field='username',
+        queryset=User.objects.all()
     )
-    
+
     class Meta:
         fields = '__all__'
         model = Follow
         validators = [
             UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
-                fields=['User', 'following'],
-                message=(
-                    'Неверные данные для создания подписки: '
-                    'Такая одписка уже существует.'
-                )
-            ),
-            
+                fields=('user', 'following'),
+                message=('Неверный запрос. '
+                         'Повторная подписка невозможна.')
+            )
         ]
-    
+
+    def create(self, validated_data):
+        if 'following' in self.initial_data:
+            return Follow.objects.create(**validated_data)
+        raise ParseError('Неверный запрос. '
+                         'Отсутствует ключ "following"')
+
+    def validate(self, data):
+        if (self.context['request'].user == data['following']
+                and self.context['request'].method == 'POST'):
+            raise ParseError('Неверный запрос. '
+                             'Попытка подписки на себя.')
+        return data
