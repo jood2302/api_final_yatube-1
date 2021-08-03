@@ -1,2 +1,59 @@
-**API_FINAL** - education project in course **"Backend developer"** from [Yandex.Praktikum](https://praktikum.yandex.ru/backend-developer/).
-A few simple models and a couple of conditions to start understanding the Django REST API framework.
+Описание.
+**API_FINAL** - учебный проект из курса **"Backend developer"** [Яндекс.Практикума](https://praktikum.yandex.ru/backend-developer/).
+Цель работы над проектом - получить навыки работы с **Django REST framework**.
+Задание представляет из себя  по заданным правилам поведения АПИ и нескольким достаточно простым моделям со связанными отношениями реализовать логику работы АПИ.
+
+Установка.
+Клонировать репозиторий и перейти в его папку в командной строке:
+
+```
+git clone https://github.com/coherentus/api_final_yatube
+```
+
+```
+cd api_final_yatube
+```
+
+Cоздать и активировать виртуальное окружение:
+
+```
+python3 -m venv venv
+```
+
+Для *nix-систем:
+
+```
+source env/bin/activate
+```
+
+Для windows-систем:
+
+```
+source venv/Scripts/activate
+```
+
+Установить зависимости из файла requirements.txt:
+
+```
+python3 -m pip install --upgrade pip
+```
+
+```
+pip install -r requirements.txt
+```
+
+Выполнить миграции:
+
+```
+python3 manage.py migrate
+```
+
+Запустить проект:
+
+```
+python3 manage.py runserver
+```
+
+
+
+Примеры. Некоторые примеры запросов к API.
