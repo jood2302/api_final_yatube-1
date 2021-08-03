@@ -55,8 +55,7 @@ class FollowSerializer(serializers.ModelSerializer):
         )
 
     def validate_following(self, value):
-        if (self.context['request'].user == value
-                and self.context['request'].method == 'POST'):
+        if (self.context['request'].user == value):
             raise ParseError('Неверный запрос. '
                              'Попытка подписки на себя.')
         return value
