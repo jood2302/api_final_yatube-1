@@ -33,7 +33,7 @@ pytest_plugins = [
     'tests.fixtures.fixture_data',
 ]
 
-# test .md
+"""# test .md
 default_md = '# api_final\napi final\n'
 filename = 'README.md'
 assert filename in root_dir_content, (
@@ -45,3 +45,4 @@ with open(filename, 'r') as f:
     assert file != default_md, (
         f'Не забудьте оформить `{filename}`'
     )
+"""

@@ -23,7 +23,7 @@ python3 -m venv venv
 Для *nix-систем:
 
 ```
-source env/bin/activate
+source venv/bin/activate
 ```
 
 Для windows-систем:
@@ -45,15 +45,44 @@ pip install -r requirements.txt
 Выполнить миграции:
 
 ```
+cd yatube_api
 python3 manage.py migrate
 ```
 
 Запустить проект:
 
 ```
+cd yatube_api
 python3 manage.py runserver
 ```
 
 
+Некоторые примеры запросов к API.
 
-Примеры. Некоторые примеры запросов к API.
+Получение списка сообществ:
+эндпойнт 
+
+...
+/api/api/v1/groups/
+...
+
+разрешённые HTTP-методы 
+
+...
+GET
+...
+
+в ответе
+
+...
+[
+  {
+    "id": 0,
+    "title": "string",
+    "slug": "string",
+    "description": "string"
+  }
+]
+response status code 200
+...
+Полный перечень запросов АПИ есть в ReDoc по адресу "/redoc/"
