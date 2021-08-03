@@ -26,7 +26,7 @@ class Post(models.Model):
     )
 
     def __str__(self):
-        return self.text
+        return self.text[:20]
 
 
 class Comment(models.Model):
@@ -54,7 +54,7 @@ class Follow(models.Model):
     )
 
     class Meta:
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
                 fields=['user', 'following'], name='unique_follow'
             ),
@@ -62,7 +62,7 @@ class Follow(models.Model):
                 check=~models.Q(user=models.F('following')),
                 name='not_yourself_follow'
             ),
-        ]
+        )
         ordering = ('user',)
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'

@@ -18,6 +18,7 @@ class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         read_only=True, slug_field='username'
     )
+    post = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         fields = '__all__'
@@ -42,26 +43,20 @@ class FollowSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = '__all__'
+        fields = ('user', 'following')
         model = Follow
-        validators = [
+        validators = (
             UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
                 fields=('user', 'following'),
                 message=('Неверный запрос. '
                          'Повторная подписка невозможна.')
-            )
-        ]
+            ),
+        )
 
-    def create(self, validated_data):
-        if 'following' in self.initial_data:
-            return Follow.objects.create(**validated_data)
-        raise ParseError('Неверный запрос. '
-                         'Отсутствует ключ "following"')
-
-    def validate(self, data):
-        if (self.context['request'].user == data['following']
+    def validate_following(self, value):
+        if (self.context['request'].user == value
                 and self.context['request'].method == 'POST'):
             raise ParseError('Неверный запрос. '
                              'Попытка подписки на себя.')
-        return data
+        return value

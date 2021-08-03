@@ -1,4 +1,5 @@
 import os
+import typing
 from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -7,7 +8,7 @@ SECRET_KEY = 'hhz7l-ltdismtf@bzyz+rple7*s*w$jak%whj@(@u0eok^f9k4'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: typing.List[str] = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -89,9 +90,12 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -99,7 +103,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    # Устанавливаем срок жизни токена
+    # срок жизни токена - 24 часа
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
