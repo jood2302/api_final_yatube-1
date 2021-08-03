@@ -17,7 +17,7 @@ class CommentsInstanceInline(admin.TabularInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'text', 'pub_date', 'author', 'group')
-    search_fields = ('text', 'author', 'group')
+    search_fields = ('text', 'author__username', 'group__title')
     list_filter = ('pub_date', 'author', 'group')
     inlines = (CommentsInstanceInline,)
     empty_value_display = '-пусто-'
