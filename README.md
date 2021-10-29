@@ -9,7 +9,7 @@
 
 Клонировать репозиторий и перейти в его папку в командной строке:
 
-```
+```bash
 git clone https://github.com/coherentus/api_final_yatube
 ```
 
