@@ -13,49 +13,52 @@
 git clone https://github.com/coherentus/api_final_yatube
 ```
 
-```
+```bash 
 cd api_final_yatube
 ```
 
 Cоздать и активировать виртуальное окружение:
 
-```
-python3 -m venv venv
+```bash 
+python -m venv venv
 ```
 
 Для *nix-систем:
 
-```
+```bash 
 source venv/bin/activate
 ```
 
 Для windows-систем:
 
-```
+```bash 
 source venv/Scripts/activate
 ```
 
 Установить зависимости из файла requirements.txt:
 
-```
-python3 -m pip install --upgrade pip
-```
-
-```
+```bash 
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 Выполнить миграции:
 
-```
+```bash 
 cd yatube_api
-python3 manage.py migrate
+python manage.py migrate
+```
+
+Создать суперпользователя django:
+
+```bash 
+python manage.py createsuperuser
 ```
 
 Запустить проект:
 
-```
-python3 manage.py runserver
+```bash 
+python manage.py runserver
 ```
 
 ***
