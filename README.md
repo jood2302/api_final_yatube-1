@@ -4,7 +4,7 @@
 
 ## студент  Leonid Slavutin
 
-## Учебный проект sprint_9.  API для Yatube.
+## Проект sprint_9.  API для Yatube.
 
 ***
 Цель работы над проектом - получить навыки работы с **Django REST framework**.
